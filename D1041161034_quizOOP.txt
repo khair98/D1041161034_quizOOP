@@ -1,0 +1,311 @@
+NAMA : RISTI UMMULKHAIR
+NIM  : D1041161034
+
+Carilah masing-masing contoh dari konsep oop berikut:
+1. Modifier (min. 3)
+	I. public static final int TEXT_REQUEST = 1;
+		public static final String EXTRA_MESSAGE = "com.example.android.twoactivities.extra.MESSAGE";
+		private EditText mMessageEditText;
+		private TextView mReplyHeadTextView;
+		private TextView mReplyTextView;
+		private static final String LOG_TAG =
+            MainActivity.class.getSimpleName();
+
+	
+	II. public static final String EXTRA_REPLY = "com.example.android.twoactivities.extra.REPLY";
+		private EditText mReply;
+	
+	III. public class activity_count extends AppCompatActivity {
+			TextView txtHello;
+			private String name;
+			private String KEY_NAME = "NAMA";
+	
+2. Method (min. 4)
+	I.  public void returnReply(View view) {
+        String reply = mReply.getText().toString();
+        Intent replyIntent = new Intent();
+        replyIntent.putExtra(EXTRA_REPLY, reply);
+        setResult(RESULT_OK, replyIntent);
+        finish();
+		}
+		
+	II. @Override
+		public void onActivityResult(int requestCode,
+                                 int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TEXT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String reply =
+                        data.getStringExtra(SecondActivity.EXTRA_REPLY);
+                mReplyHeadTextView.setVisibility(View.VISIBLE);
+                mReplyTextView.setText(reply);
+                mReplyTextView.setVisibility(View.VISIBLE);
+            }
+        }
+		}
+	
+	III. protected void onCreate(Bundle savedInstanceState) {
+		 super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+         mMessageEditText = findViewById(R.id.editText_second);
+         mReplyHeadTextView = findViewById(R.id.text_header);
+         mReplyTextView = findViewById(R.id.text_message);
+		 }	
+		 
+	IV. protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+        mReply = findViewById(R.id.editText_second);
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        TextView textView = findViewById(R.id.text_message);
+        textView.setText(message);
+		}
+	
+3. Class (min. 2)
+	I. public class MainActivity extends AppCompatActivity {
+       public static final int TEXT_REQUEST = 1;
+		public static final String EXTRA_MESSAGE = "com.example.android.twoactivities.extra.MESSAGE";
+		private EditText mMessageEditText;
+		private TextView mReplyHeadTextView;
+		private TextView mReplyTextView;
+		private static final String LOG_TAG =
+            MainActivity.class.getSimpleName();
+
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mMessageEditText = findViewById(R.id.editText_second);
+        mReplyHeadTextView = findViewById(R.id.text_header);
+        mReplyTextView = findViewById(R.id.text_message);
+		}
+
+		@Override
+		public void onActivityResult(int requestCode,
+                                 int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TEXT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String reply =
+                        data.getStringExtra(SecondActivity.EXTRA_REPLY);
+                mReplyHeadTextView.setVisibility(View.VISIBLE);
+                mReplyTextView.setText(reply);
+                mReplyTextView.setVisibility(View.VISIBLE);
+            }
+        }
+		}
+
+		}
+
+	
+	II. public class SecondActivity extends AppCompatActivity {
+		public static final String EXTRA_REPLY = "com.example.android.twoactivities.extra.REPLY";
+		private EditText mReply;
+
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+        mReply = findViewById(R.id.editText_second);
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        TextView textView = findViewById(R.id.text_message);
+        textView.setText(message);
+		}
+
+		public void returnReply(View view) {
+        String reply = mReply.getText().toString();
+        Intent replyIntent = new Intent();
+        replyIntent.putExtra(EXTRA_REPLY, reply);
+        setResult(RESULT_OK, replyIntent);
+        finish();
+		}
+
+
+
+		}
+
+	
+	III. public class activity_count extends AppCompatActivity {
+			TextView txtHello;
+			private String name;
+			private String KEY_NAME = "NAMA";
+
+			Button countup,countdown;
+			int counter;
+			TextView nilai;
+			Context context;
+
+			@Override
+			protected void onCreate(Bundle savedInstanceState) {
+				super.onCreate(savedInstanceState);
+				setContentView(R.layout.activity_count);
+
+				setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+				txtHello = (TextView) findViewById(R.id.halo);
+
+				Bundle extras = getIntent().getExtras();
+				name = extras.getString(KEY_NAME);
+				txtHello.setText("Hallo " + name);
+
+				context = this;
+				counter=34;
+
+				countup = (Button)findViewById(R.id.countup);
+				countdown = (Button)findViewById(R.id.countdown);
+				nilai = (TextView)findViewById(R.id.number);
+				nilai.setText(""+counter);
+
+				countup.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						counter++;
+						nilai.setText(""+counter);
+					}
+				});
+
+				countdown.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						counter--;
+						nilai.setText(""+counter);
+					}
+				});
+			}
+		}
+
+4. Function (min. 3)
+	I.  countup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counter++;
+                nilai.setText(""+counter);
+            }
+        });
+
+	II. countdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counter--;
+                nilai.setText(""+counter);
+            }
+        });
+	
+	III.  
+	
+5. Constructor (min. 2)
+	I. public class MainActivity extends AppCompatActivity {
+	   public static final int TEXT_REQUEST = 1;
+       public static final String EXTRA_MESSAGE = "com.example.android.twoactivities.extra.MESSAGE";
+       private EditText mMessageEditText;
+       private TextView mReplyHeadTextView;
+       private TextView mReplyTextView;
+       private static final String LOG_TAG =
+            MainActivity.class.getSimpleName();
+	
+	II. public class activity_count extends AppCompatActivity {
+		TextView txtHello;
+		private String name;
+		private String KEY_NAME = "NAMA";
+
+		Button countup,countdown;
+		int counter;
+		TextView nilai;
+		Context context;
+	
+6. Polimorfisme (min. 3)
+	I. public class Polimorphism {
+		 
+		   public static void main(String[ ] args) {
+		 
+			  cetakObyek(new Balok());
+			  cetakObyek(new PersegiPanjang());
+			  cetakObyek(new BangunDatar());
+			  cetakObyek(new Object());
+		   }
+			
+		   public static void cetakObyek(Object obyek) {
+			  System.out.println(obyek);
+		   }
+		 
+		} // Akhir kelas Polimorphism
+		 
+		class Balok extends PersegiPanjang {
+		   public String toString() {
+			  return "Mempunyai sisi panjang, lebar dan tinggi";
+		   }
+		}
+		 
+		class PersegiPanjang extends BangunDatar {
+		   public String toString() {
+			  return "Mempunyai sisi panjang dan lebar";
+		   }
+		}
+		 
+		class BangunDatar extends Object {
+		   public String toString() {
+			  return "Mempunyai berbagai bentuk";
+		   }
+		}
+
+	II. //Kelas Utama/Main
+		public class karnivora {
+			public static void main(String[] args){
+				//Cara Penulisan Objek: (superclass) variable = new (subclass);
+				System.out.println("===== HEWAN DEFAULT =====");
+				hewan h = new hewan();
+				h.setNama();
+				h.setSuara();
+				h.setBerat();
+				
+				System.out.println("===== HEWAN KUCING =====");
+				hewan k = new kucing();
+				k.setNama();
+				k.setSuara();
+				k.setBerat();
+				
+				System.out.println("===== HEWAN SINGA =====");
+				hewan s = new singa();
+				s.setNama();
+				s.setSuara();
+				s.setBerat();
+			}
+		}
+	
+	III. /program utama
+		public class Programpolimorphis
+		{
+			/**Main method*/
+			public static void main(String []args)
+			{
+				System.out.println(“\n Program Polimorphis”);
+				System.out.println(“======================”);
+				//membuat objek-objek raut(ekspresi) dari wajah
+				Bentukwajah objbentuk=new Bentukwajah();
+				Senyum objsenyum=new Senyum();
+				Tertawa objtertawa=new Tertawa();
+				Marah objmarah=new Marah();
+				Sedih objsedih=new Sedih();
+				//polimorphis dari bentuk wajah ada 5 dimulai dari 0-4
+				Bentukwajah []Bentuk=new Bentukwajah[5];
+				Bentuk[0]=objbentuk;
+				Bentuk[1]=objsenyum;
+				Bentuk[2]=objtertawa;
+				Bentuk[3]=objmarah;
+				Bentuk[4]=objsedih;
+				System.out.println(“Bentuk[0]:”+Bentuk[0].respons());
+				System.out.println(“Bentuk[1]:”+Bentuk[1].respons());
+				System.out.println(“Bentuk[2]:”+Bentuk[2].respons());
+				System.out.println(“Bentuk[3]:”+Bentuk[3].respons());
+				System.out.println(“Bentuk[4]:”+Bentuk[4].respons());
+			}
+		}
+	
+7. Inheritance (min. 3)
+	I. super.onCreate(savedInstanceState); \\ Di 34_tugasToastActiv
+	
+	II. super.onActivityResult(requestCode, resultCode, data);
+	
+	III.  super.onCreate(savedInstanceState); \\ Di TwoActivities_34
